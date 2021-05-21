@@ -20,9 +20,11 @@ jobs:
         run: |
           set -o pipefail &&
           xcodebuild 
-          -project iosApp.xcodeproj
+        -project iosApp.xcodeproj[]
           -destination 'platform=iOS Simulator,name=iPhone 12'
           -sdk iphonesimulator
           -scheme iosApp
           -configuration Debug
+          --allowProvisioningUpdates
+          --allowProvisioningDeviceRegistration
           clean build | xcpretty
