@@ -8,19 +8,14 @@ plugins {
 kotlin {
     android()
 
-    val iosTarget: (String, KotlinNativeTarget.() -> Unit) -> KotlinNativeTarget =
-        if (System.getenv("SDK_NAME")?.startsWith("iphoneos") == true)
-            ::iosArm64
-        else
-            ::iosX64
-
-    iosTarget("ios") {
+    ios {
         binaries {
             framework {
                 baseName = "shared"
             }
         }
     }
+
     sourceSets {
         val commonMain by getting
         val commonTest by getting {
@@ -50,10 +45,11 @@ android {
     }
 }
 
-val packForXcode by tasks.creating(Sync::class) {
+val packForXcodeArm by tasks.creating(Sync::class) {
+    group = "build"
     val mode = System.getenv("CONFIGURATION") ?: "DEBUG"
-    val framework = kotlin.targets.getByName<KotlinNativeTarget>("ios").binaries.getFramework(mode)
-    val targetDir = File(buildDir, "xcode-frameworks")
+    val framework = kotlin.targets.getByName<KotlinNativeTarget>("iosArm64").binaries.getFramework(mode)
+    val targetDir = File(buildDir, "xcode-frameworks-arm")
 
     group = "build"
     dependsOn(framework.linkTask)
@@ -63,4 +59,20 @@ val packForXcode by tasks.creating(Sync::class) {
     into(targetDir)
 }
 
-tasks.getByName("build").dependsOn(packForXcode)
+tasks.getByName("build").dependsOn(packForXcodeArm)
+
+val packForXcodeX64 by tasks.creating(Sync::class) {
+    group = "build"
+    val mode = System.getenv("CONFIGURATION") ?: "DEBUG"
+    val framework = kotlin.targets.getByName<KotlinNativeTarget>("iosX64").binaries.getFramework(mode)
+    val targetDir = File(buildDir, "xcode-frameworks-X64")
+
+    group = "build"
+    dependsOn(framework.linkTask)
+    inputs.property("mode", mode)
+
+    from({ framework.outputDirectory })
+    into(targetDir)
+}
+
+tasks.getByName("build").dependsOn(packForXcodeX64)
