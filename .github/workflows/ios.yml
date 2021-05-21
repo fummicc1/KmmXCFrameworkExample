@@ -25,6 +25,7 @@ jobs:
           -sdk iphonesimulator
           -scheme iosApp
           -configuration Debug          
-          clean build 
           --allowProvisioningUpdates
-          --allowProvisioningDeviceRegistration | xcpretty
+          --allowProvisioningDeviceRegistration
+          clean build 
+          | xcpretty
