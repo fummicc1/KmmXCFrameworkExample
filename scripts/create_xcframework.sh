@@ -1,6 +1,6 @@
 #!/bin/bash
 
-cd ../
+cd "${SRCROOT}/../"
 
 ./gradlew :shared:packForXCodeArm -PXCODE_CONFIGURATION=${CONFIGURATION}
 ./gradlew :shared:packForXCodeX64 -PXCODE_CONFIGURATION=${CONFIGURATION}
@@ -14,3 +14,11 @@ if [ -d ${UNIVERSAL_PATH} ]; then
 fi
 
 xcodebuild -create-xcframework -framework "${ARM64PATH}" -framework "${X64PATH}" -output "${UNIVERSAL_PATH}/${FRAMEWORK_NAME}.xcframework"
+
+cd "${UNIVERSAL_PATH}/${FRAMEWORK_NAME}.xcframework"
+
+PlistBuddy="/usr/libexec/PlistBuddy"
+
+${PlistBuddy} -c "Copy :AvailableLibraries:1 :AvailableLibraries:2" "Info.plist"
+${PlistBuddy} -c "Set :AvailableLibraries:2:SupportedPlatform simulator" "Info.plist"
+${PlistBuddy} -c "Set :AvailableLibraries:2:LibraryIdentifier ios-arm64-simulator" "Info.plist"

@@ -24,8 +24,6 @@ jobs:
           -destination 'platform=iOS Simulator,name=iPhone 12'
           -sdk iphonesimulator
           -scheme iosApp
-          -configuration Debug          
-          --allowProvisioningUpdates
-          --allowProvisioningDeviceRegistration
+          -configuration Debug
           clean build 
           | xcpretty
