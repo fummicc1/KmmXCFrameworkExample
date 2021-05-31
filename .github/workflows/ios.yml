@@ -19,11 +19,10 @@ jobs:
       - name: Xcode Build
         run: |
           set -o pipefail &&
-          xcodebuild 
-          -project iosApp.xcodeproj
-          -destination 'platform=iOS Simulator,name=iPhone 12'
-          -sdk iphonesimulator
-          -scheme iosApp
-          -configuration Debug
-          clean build 
-          | xcpretty
+          xcodebuild \
+          -project iosApp.xcodeproj \
+          -destination 'platform=iOS Simulator,name=iPhone 12' \
+          -sdk iphonesimulator \
+          -scheme iosApp \
+          -configuration Debug \
+          clean build | xcpretty
