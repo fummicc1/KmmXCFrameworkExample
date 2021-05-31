@@ -61,6 +61,22 @@ val packForXcodeArm by tasks.creating(Sync::class) {
 
 tasks.getByName("build").dependsOn(packForXcodeArm)
 
+val packForXcodeArmSimulator by tasks.creating(Sync::class) {
+    group = "build"
+    val mode = System.getenv("CONFIGURATION") ?: "DEBUG"
+    val framework = kotlin.targets.getByName<KotlinNativeTarget>("iosArm64").binaries.getFramework(mode)
+    val targetDir = File(buildDir, "xcode-frameworks-arm-simulator")
+
+    group = "build"
+    dependsOn(framework.linkTask)
+    inputs.property("mode", mode)
+
+    from({ framework.outputDirectory })
+    into(targetDir)
+}
+
+tasks.getByName("build").dependsOn(packForXcodeArmSimulator)
+
 val packForXcodeX64 by tasks.creating(Sync::class) {
     group = "build"
     val mode = System.getenv("CONFIGURATION") ?: "DEBUG"
