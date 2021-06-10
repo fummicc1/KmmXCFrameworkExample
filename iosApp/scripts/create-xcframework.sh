@@ -1,6 +1,6 @@
 #!/bin/bash
 
-cd "${SRCROOT}/../"
+cd ../
 
 ./gradlew :shared:packForXCodeArm -PXCODE_CONFIGURATION=${CONFIGURATION}
 ./gradlew :shared:packForXCodeX64 -PXCODE_CONFIGURATION=${CONFIGURATION}
