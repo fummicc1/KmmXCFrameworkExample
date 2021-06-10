@@ -14,8 +14,16 @@ jobs:
       - uses: actions/checkout@v2
       - name: "Select Xcode"
         run: sudo xcode-select -s /Applications/Xcode_12.4.app/Contents/Developer
+      - uses: actions/setup-java@v1
+        with:
+          java-version: '11'
       - name: "Install xcpretty"
         run: gem install xcpretty
+      - name: Make Gradle executable
+        run: chmod +x ../gradlew
+      - name: Create XCFramework
+        run: ./scripts/create-xcframework.sh
+        shell: bash
       - name: Xcode Build
         run: |
           set -o pipefail &&

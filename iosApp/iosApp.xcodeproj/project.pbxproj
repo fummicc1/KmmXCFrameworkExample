@@ -9,18 +9,18 @@
 /* Begin PBXBuildFile section */
 		2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2152FB032600AC8F00CF470E /* iOSApp.swift */; };
 		7555FF83242A565900829871 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7555FF82242A565900829871 /* ContentView.swift */; };
-		D3D58BF92664BAD50096CE25 /* shared.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3D58BF52664BA590096CE25 /* shared.xcframework */; };
-		D3D58BFA2664BAD50096CE25 /* shared.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D3D58BF52664BA590096CE25 /* shared.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D3D58BFC2664C09E0096CE25 /* shared.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3D58BF52664BA590096CE25 /* shared.xcframework */; };
+		D3D58BFD2664C09E0096CE25 /* shared.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D3D58BF52664BA590096CE25 /* shared.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		D3D58BFB2664BAD50096CE25 /* Embed Frameworks */ = {
+		D3D58BFE2664C09E0096CE25 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				D3D58BFA2664BAD50096CE25 /* shared.xcframework in Embed Frameworks */,
+				D3D58BFD2664C09E0096CE25 /* shared.xcframework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -40,7 +40,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D3D58BF92664BAD50096CE25 /* shared.xcframework in Frameworks */,
+				D3D58BFC2664C09E0096CE25 /* shared.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -93,7 +93,7 @@
 				7555FF77242A565900829871 /* Sources */,
 				7555FF78242A565900829871 /* Frameworks */,
 				7555FF79242A565900829871 /* Resources */,
-				D3D58BFB2664BAD50096CE25 /* Embed Frameworks */,
+				D3D58BFE2664C09E0096CE25 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -163,7 +163,8 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "cd ../scripts\nchmod +x create_xcframework.sh\n./create_xcframework.sh\n";
+			shellScript = "
+";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -300,8 +301,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
-				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = "";
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 2X6AD4W323;
 				ENABLE_BITCODE = YES;
 				ENABLE_PREVIEWS = YES;
 				FRAMEWORK_SEARCH_PATHS = "";
@@ -327,8 +329,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
-				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = "";
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 2X6AD4W323;
 				ENABLE_BITCODE = YES;
 				ENABLE_PREVIEWS = YES;
 				FRAMEWORK_SEARCH_PATHS = "";
